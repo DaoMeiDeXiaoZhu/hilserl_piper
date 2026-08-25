@@ -1,3 +1,5 @@
+
+https://github.com/user-attachments/assets/2590fba6-25ec-4662-ae1b-45827cb58f90
 # lerobot_hilserl
 
 外壳仓库：配置与脚本在本目录；**不改** `lerobot` / `hilserl_piper` 源码。通过 `piper_bridge` 复用 `hilserl_piper` 的连臂 / 键盘 / 相机逻辑。
@@ -249,3 +251,6 @@ python scripts/train_sac.py --role actor
 4. **终端焦点**：采集键鼠事件读本终端 tty；切到别的窗口会收不到键。
 5. **退出后终端无回显**：执行 `stty sane`。
 6. **三种 BC 模式互不覆盖**：换 `--obs-mode` 就换一套 `outputs/bc_*`；推理必须用同一 mode 才能对上输入维与权重。
+
+## 效果演示
+Uploading hilserl_piper插插座.mp4…
