@@ -1,0 +1,14 @@
+{
+  "step": 10000,
+  "bc_mse": 0.000807033502496779,
+  "obs_mode": "image",
+  "mdp_root": "/home/siasunds/桌面/lerobot_hilserl/datasets/mdp",
+  "kept_frames": 2373,
+  "action_dim": 3,
+  "image_key": "observation.images.wrist",
+  "image_size": [
+    128,
+    128
+  ],
+  "train_config": "/home/siasunds/桌面/lerobot_hilserl/cfg/train_config.json"
+}

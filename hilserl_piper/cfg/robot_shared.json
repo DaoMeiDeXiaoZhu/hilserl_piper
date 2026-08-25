@@ -1,0 +1,111 @@
+{
+    "_comment": "键盘开环 Δxyz。step=1mm，action_scale=1.5mm。无夹爪动作/观测；示教时夹爪闭合。",
+    "fps": 20,
+    "action": {
+        "type": "delta_ee_xyz",
+        "include_rpy": false,
+        "include_gripper": false,
+        "action_scale_mm": 1.5,
+        "action_scale_m": 0.0015,
+        "names": [
+            "dx_eff",
+            "dy_eff",
+            "dz_eff"
+        ],
+        "space": "[-1, 1]",
+        "physical": "delta_m = a * action_scale_m"
+    },
+    "observation": {
+        "_comment": "启用字段 true/false 决定 demo/SAC 是否写入该观测；手改即可，无需重跑标定。images 与硬件 cameras 角色对应。",
+        "images": {
+            "wrist": true,
+            "front": false
+        },
+        "joint_pos": false,
+        "joint_vel": false,
+        "joint_current": false,
+        "eef_xyz": true,
+        "eef_rpy": true,
+        "gripper_gap": false,
+        "resize_size": [
+            480,
+            640
+        ],
+        "crop_params_dict": {
+            "wrist": [
+                0,
+                0,
+                1080,
+                1920
+            ],
+            "observation.images.wrist": [
+                0,
+                0,
+                1080,
+                1920
+            ]
+        }
+    },
+    "workspace": {
+        "include_rpy": false,
+        "out_of_bounds": "clip",
+        "xyz_min": [
+            0.2063510011434555,
+            -0.3386920053958893,
+            0.17173999953269958
+        ],
+        "xyz_max": [
+            0.3082790036201477,
+            -0.17962600696086883,
+            0.25771298599243164
+        ]
+    },
+    "reset": {
+        "env_reset_time_s": 0.5,
+        "mode": "joint",
+        "fixed_reset_joint_positions": [
+            -0.8380722403526306,
+            1.8105523586273193,
+            -1.430122971534729,
+            -0.022916175425052643,
+            1.228624701499939,
+            0.804561972618103
+        ]
+    },
+    "robot": {
+        "move_spd_rate": 80,
+        "use_end_effector_bounds": true,
+        "use_joint_bounds": false,
+        "end_effector_bounds": {
+            "min": [
+                0.2063510011434555,
+                -0.3386920053958893,
+                0.17173999953269958
+            ],
+            "max": [
+                0.3082790036201477,
+                -0.17962600696086883,
+                0.25771298599243164
+            ]
+        }
+    },
+    "teleop": {
+        "type": "keyboard",
+        "use_gripper": false,
+        "_comment": "仅从臂 + 键盘 Δxyz；夹爪保持闭合，不进动作空间。"
+    },
+    "keyboard": {
+        "keyboard_ee_control": true,
+        "keyboard_ee_step_m": 0.001,
+        "hold_s": 0.06,
+        "_comment_step": "每 fps 步最多平移这么多（米）。键盘固定 1mm。"
+    },
+    "dataset_layout": {
+        "root": "/home/siasunds/桌面/lerobot_hilserl/datasets",
+        "raw": "raw",
+        "mdp": "mdp",
+        "demo": "demo",
+        "sac": "sac",
+        "classifier": "classifier"
+    }
+}

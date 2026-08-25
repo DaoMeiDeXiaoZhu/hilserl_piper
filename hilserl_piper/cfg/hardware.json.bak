@@ -1,0 +1,27 @@
+{
+    "_comment": "本机硬件。运行: python scripts/setup.py",
+    "control": {
+        "_comment": "仅从臂 + 键盘。follower 执行。",
+        "mode": "follower_only",
+        "follower_can": "can0",
+        "leader_can": null
+    },
+    "cameras": {
+        "wrist": {
+            "type": "opencv",
+            "index_or_path": "/dev/v4l/by-id/usb-Sonix_Technology_Co.__Ltd._Orbbec_DaBai_DCW2_RGB_Camera_AUI9C42004V-video-index0",
+            "serial": "AUI9C42004V",
+            "label": "Orbbec DaBai DCW2 RGB Camera: O",
+            "fps": 20,
+            "width": 1920,
+            "height": 1080,
+            "fourcc": "MJPG",
+            "warmup_s": 2,
+            "crop": null,
+            "usage_size": [
+                256,
+                256
+            ]
+        }
+    }
+}

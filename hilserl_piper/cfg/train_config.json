@@ -1,0 +1,246 @@
+{
+  "_comment": "BC/SAC 共用底座。BC 用 --obs-mode 覆盖 input_features：eef(3) / image / image_eef。动作固定 Δxyz(3)。",
+  "dataset": {
+    "repo_id": "local/piper_mdp",
+    "root": "/home/siasunds/桌面/lerobot_hilserl/datasets/mdp",
+    "episodes": null,
+    "image_transforms": {
+      "enable": false,
+      "max_num_transforms": 3,
+      "random_order": false,
+      "tfs": {}
+    },
+    "revision": null,
+    "use_imagenet_stats": false,
+    "video_backend": "torchcodec",
+    "return_uint8": false,
+    "streaming": false,
+    "eval_split": 0.0
+  },
+  "env": {
+    "type": "gym_manipulator",
+    "task": "plug_socket",
+    "fps": 20,
+    "features": {
+      "observation.state": {
+        "type": "STATE",
+        "shape": [
+          3
+        ]
+      },
+      "action": {
+        "type": "ACTION",
+        "shape": [
+          3
+        ]
+      }
+    },
+    "features_map": {
+      "observation.state": "observation.state",
+      "action": "action"
+    },
+    "max_parallel_tasks": 1,
+    "disable_env_checker": true,
+    "name": "real_robot"
+  },
+  "policy": {
+    "type": "gaussian_actor",
+    "n_obs_steps": 1,
+    "input_features": {
+      "observation.state": {
+        "type": "STATE",
+        "shape": [
+          3
+        ]
+      }
+    },
+    "output_features": {
+      "action": {
+        "type": "ACTION",
+        "shape": [
+          3
+        ]
+      }
+    },
+    "device": "cuda",
+    "use_amp": false,
+    "use_peft": false,
+    "push_to_hub": false,
+    "repo_id": null,
+    "pretrained_path": "/home/siasunds/桌面/lerobot_hilserl/outputs/bc_image/checkpoints/last/pretrained_model",
+    "normalization_mapping": {
+      "VISUAL": "MEAN_STD",
+      "STATE": "MIN_MAX",
+      "ENV": "MIN_MAX",
+      "ACTION": "MIN_MAX"
+    },
+    "dataset_stats": {
+      "observation.state": {
+        "min": [
+          0.0,
+          -1.0,
+          0.0
+        ],
+        "max": [
+          1.0,
+          1.0,
+          1.0
+        ]
+      },
+      "action": {
+        "min": [
+          -1,
+          -1,
+          -1
+        ],
+        "max": [
+          1,
+          1,
+          1
+        ]
+      }
+    },
+    "storage_device": "cpu",
+    "vision_encoder_name": null,
+    "freeze_vision_encoder": false,
+    "image_encoder_hidden_dim": 32,
+    "shared_encoder": true,
+    "num_discrete_actions": null,
+    "image_embedding_pooling_dim": 8,
+    "state_encoder_hidden_dim": 256,
+    "latent_dim": 64,
+    "online_steps": 1000000,
+    "online_buffer_capacity": 30000,
+    "offline_buffer_capacity": 20000,
+    "async_prefetch": false,
+    "online_step_before_learning": 1000,
+    "filter_idle_transitions": true,
+    "idle_xyz_thresh_m": 0.0008,
+    "keep_idle_terminals": true,
+    "actor_learner_config": {
+      "learner_host": "127.0.0.1",
+      "learner_port": 50051,
+      "policy_parameters_push_frequency": 50,
+      "queue_get_timeout": 2
+    },
+    "concurrency": {
+      "actor": "threads",
+      "learner": "threads"
+    },
+    "actor_network_kwargs": {
+      "hidden_dims": [
+        256,
+        256
+      ],
+      "activate_final": true
+    },
+    "policy_kwargs": {
+      "use_tanh_squash": true,
+      "std_min": -5.0,
+      "std_max": 2.0,
+      "init_final": 0.05
+    },
+    "discrete_critic_network_kwargs": {
+      "hidden_dims": [
+        256,
+        256
+      ],
+      "activate_final": true,
+      "final_activation": null
+    }
+  },
+  "reward_model": null,
+  "output_dir": "/home/siasunds/桌面/lerobot_hilserl/outputs/plug_socket_xyz_hilserl",
+  "job_name": "plug_socket_xyz_hilserl",
+  "resume": false,
+  "seed": 1000,
+  "cudnn_deterministic": false,
+  "num_workers": 4,
+  "batch_size": 128,
+  "prefetch_factor": 4,
+  "persistent_workers": true,
+  "steps": 100000,
+  "env_eval_freq": 20000,
+  "log_freq": 100,
+  "eval_steps": 0,
+  "max_eval_samples": 0,
+  "tolerance_s": 0.0001,
+  "save_checkpoint": true,
+  "save_freq": 5000,
+  "use_policy_training_preset": true,
+  "optimizer": {
+    "type": "multi_adam",
+    "lr": 0.001,
+    "weight_decay": 0.0,
+    "grad_clip_norm": 10.0,
+    "optimizer_groups": {
+      "actor": {
+        "lr": 0.0003
+      },
+      "critic": {
+        "lr": 0.0003
+      },
+      "temperature": {
+        "lr": 0.0003
+      }
+    }
+  },
+  "scheduler": null,
+  "eval": {
+    "n_episodes": 50,
+    "batch_size": 11,
+    "use_async_envs": true,
+    "recording": false
+  },
+  "wandb": {
+    "enable": false,
+    "disable_artifact": true,
+    "project": "lerobot_hilserl",
+    "entity": null,
+    "notes": null,
+    "run_id": null,
+    "mode": null,
+    "add_tags": true
+  },
+  "peft": null,
+  "save_checkpoint_to_hub": false,
+  "sample_weighting": null,
+  "rename_map": {},
+  "checkpoint_path": null,
+  "algorithm": {
+    "type": "sac",
+    "actor_lr": 0.0003,
+    "critic_lr": 0.0003,
+    "temperature_lr": 0.0003,
+    "discount": 0.97,
+    "use_backup_entropy": true,
+    "critic_target_update_weight": 0.005,
+    "num_critics": 2,
+    "num_subsample_critics": null,
+    "critic_network_kwargs": {
+      "hidden_dims": [
+        256,
+        256
+      ],
+      "activate_final": true,
+      "final_activation": null
+    },
+    "discrete_critic_network_kwargs": {
+      "hidden_dims": [
+        256,
+        256
+      ],
+      "activate_final": true,
+      "final_activation": null
+    },
+    "temperature_init": 0.01,
+    "target_entropy": null,
+    "utd_ratio": 2,
+    "policy_update_freq": 1,
+    "grad_clip_norm": 40.0,
+    "use_torch_compile": false,
+    "policy_config": null
+  },
+  "mixer": "online_offline",
+  "online_ratio": 0.5
+}

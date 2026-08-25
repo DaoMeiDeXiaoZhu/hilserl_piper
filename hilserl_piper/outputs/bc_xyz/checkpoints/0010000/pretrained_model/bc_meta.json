@@ -1,0 +1,7 @@
+{
+  "step": 10000,
+  "bc_mse": 0.057854633778333664,
+  "demo_root": "/home/siasunds/桌面/lerobot_hilserl/datasets/demo",
+  "kept_frames": 1863,
+  "train_config": "/home/siasunds/桌面/lerobot_hilserl/cfg/train_config_xyz.json"
+}

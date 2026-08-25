@@ -1,0 +1,114 @@
+{
+    "type": "gaussian_actor",
+    "n_obs_steps": 1,
+    "input_features": {
+        "observation.images.wrist": {
+            "type": "VISUAL",
+            "shape": [
+                3,
+                128,
+                128
+            ]
+        }
+    },
+    "output_features": {
+        "action": {
+            "type": "ACTION",
+            "shape": [
+                3
+            ]
+        }
+    },
+    "device": "cuda",
+    "use_amp": false,
+    "use_peft": false,
+    "push_to_hub": false,
+    "repo_id": null,
+    "private": null,
+    "tags": null,
+    "license": null,
+    "pretrained_path": null,
+    "pretrained_revision": null,
+    "normalization_mapping": {
+        "VISUAL": "MEAN_STD",
+        "STATE": "MIN_MAX",
+        "ENV": "MIN_MAX",
+        "ACTION": "MIN_MAX"
+    },
+    "dataset_stats": {
+        "action": {
+            "min": [
+                -1.0,
+                -1.0,
+                -1.0
+            ],
+            "max": [
+                1.0,
+                1.0,
+                1.0
+            ]
+        },
+        "observation.images.wrist": {
+            "mean": [
+                0.485,
+                0.456,
+                0.406
+            ],
+            "std": [
+                0.229,
+                0.224,
+                0.225
+            ]
+        }
+    },
+    "storage_device": "cpu",
+    "vision_encoder_name": null,
+    "freeze_vision_encoder": false,
+    "image_encoder_hidden_dim": 32,
+    "shared_encoder": true,
+    "num_discrete_actions": null,
+    "image_embedding_pooling_dim": 8,
+    "state_encoder_hidden_dim": 256,
+    "latent_dim": 64,
+    "online_steps": 1000000,
+    "online_buffer_capacity": 100000,
+    "offline_buffer_capacity": 100000,
+    "async_prefetch": false,
+    "online_step_before_learning": 100,
+    "filter_idle_transitions": false,
+    "idle_xyz_thresh_m": 0.0008,
+    "idle_rpy_thresh_deg": 1.0,
+    "idle_gripper_thresh_m": 0.002,
+    "keep_idle_terminals": true,
+    "actor_learner_config": {
+        "learner_host": "127.0.0.1",
+        "learner_port": 50051,
+        "policy_parameters_push_frequency": 4,
+        "queue_get_timeout": 2
+    },
+    "concurrency": {
+        "actor": "threads",
+        "learner": "threads"
+    },
+    "actor_network_kwargs": {
+        "hidden_dims": [
+            256,
+            256
+        ],
+        "activate_final": true
+    },
+    "policy_kwargs": {
+        "use_tanh_squash": true,
+        "std_min": -5.0,
+        "std_max": 2.0,
+        "init_final": 0.05
+    },
+    "discrete_critic_network_kwargs": {
+        "hidden_dims": [
+            256,
+            256
+        ],
+        "activate_final": true,
+        "final_activation": null
+    }
+}
